@@ -10,5 +10,7 @@ export interface Movie {
 }
 
 export interface CatalogPlaying {
+
+    
     
 }
