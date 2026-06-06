@@ -2,15 +2,20 @@
 
 export interface Movie {
     id: number,
-    original_title: string,
+    title: string,
     overview: string,
     popularity: number,
-    image: string,
+    poster_path: string,
     release_date: string,
 }
 
-export interface CatalogPlaying {
+export interface Carousel {
 
-    
+    id: number,
+    title: string,
+    original_language: string,
+    overview: string,
+    popularity: number,
+    backdrop_path: string,
     
 }
