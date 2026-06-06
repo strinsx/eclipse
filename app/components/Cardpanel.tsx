@@ -33,13 +33,15 @@ export function CardPanel() {
         setCurrentIndex((prev) => (prev === playing.length - 1 ? 0 : prev + 1));
     };
 
+    const currentMovie = playing[currentIndex];
+
     return (
-        <div className="relative w-full h-150 overflow-hidden rounded-xl">
+        <div className="relative w-full h-150 overflow-hidden rounded-xl group">
 
             {/* Loading */}
             {isLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-20">
-                    <p className="text-white text-lg font-semibold">Loading...</p>
+                <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-20">
+                    <p className="text-foreground text-lg font-semibold">Loading...</p>
                 </div>
             )}
 
@@ -47,32 +49,62 @@ export function CardPanel() {
             {playing.map((movie, index) => (
                 <div
                     key={movie.id}
-                    className={`absolute inset-0 transition-opacity duration-700 ${
-                        index === currentIndex ? "opacity-100" : "opacity-0"
-                    }`}
+                    className={`absolute inset-0 transition-opacity duration-700 ${index === currentIndex ? "opacity-100" : "opacity-0"
+                        }`}
                 >
                     <Image
                         src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
                         alt='backdrop'
                         fill
-                        className="object-cover"
+                        className="object-cover transition duration-300 saturate-80 group-hover:saturate-120"
                     />
 
                     {/* Top gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-transparent z-10" />
 
                     {/* Bottom gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent z-10" />
 
                     {/* Side gradients */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 z-10" />
                 </div>
             ))}
+
+            {/* Movie Info */}
+            {currentMovie && (
+                <div className="absolute bottom-14 left-8 z-20 max-w-lg">
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xs uppercase tracking-widest text-foreground/60 border border-foreground/20 px-2 py-0.5 rounded-full">
+                            {currentMovie.original_language.toUpperCase()}
+                        </span>
+                        <span className="text-xs text-foreground/50">
+                            ★ {currentMovie.popularity.toFixed(1)}
+                        </span>
+                    </div>
+
+                    <h2 className="text-foreground text-3xl font-bold mb-2 drop-shadow-lg">
+                        {currentMovie.title}
+                    </h2>
+
+                    <p className="text-foreground/70 text-sm leading-relaxed line-clamp-2 mb-4">
+                        {currentMovie.overview}
+                    </p>
+
+                    <div className="flex items-center gap-3">
+                        <button className="cursor-pointer flex items-center gap-2 bg-foreground text-background font-semibold px-5 py-2 rounded-full hover:opacity-90 transition text-sm">
+                            ▶ Play Now
+                        </button>
+                        <button className="cursor-pointer flex items-center gap-2 bg-foreground/10 backdrop-blur-sm text-foreground font-semibold px-5 py-2 rounded-full hover:bg-foreground/20 transition text-sm border border-foreground/20">
+                            + Play Later
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* Prev Button */}
             <button
                 onClick={prevSlide}
-                className="absolute curosr-pointer left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/25 backdrop-blur-sm text-white rounded-full w-10 h-10 flex items-center justify-center transition border border-white/20"
+                className="absolute cursor-pointer left-4 top-1/2 -translate-y-1/2 z-20 bg-foreground/10 hover:bg-foreground/25 backdrop-blur-sm text-foreground rounded-full w-10 h-10 flex items-center justify-center transition border border-foreground/20"
             >
                 ‹
             </button>
@@ -80,7 +112,7 @@ export function CardPanel() {
             {/* Next Button */}
             <button
                 onClick={nextSlide}
-                className="absolute cursor-pointer right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/25 backdrop-blur-sm text-white rounded-full w-10 h-10 flex items-center justify-center transition border border-white/20"
+                className="absolute cursor-pointer right-4 top-1/2 -translate-y-1/2 z-20 bg-foreground/10 hover:bg-foreground/25 backdrop-blur-sm text-foreground rounded-full w-10 h-10 flex items-center justify-center transition border border-foreground/20"
             >
                 ›
             </button>
@@ -91,9 +123,8 @@ export function CardPanel() {
                     <button
                         key={index}
                         onClick={() => setCurrentIndex(index)}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${
-                            index === currentIndex ? "bg-white w-10" : "bg-white/40 w-2.5"
-                        }`}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-foreground w-10" : "bg-foreground/40 w-2.5"
+                            }`}
                     />
                 ))}
             </div>
