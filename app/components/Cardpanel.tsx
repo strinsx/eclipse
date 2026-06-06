@@ -13,7 +13,7 @@ export function CardPanel() {
             setIsLoading(true);
             const response = await fetch('http://localhost:3000/api/playing');
             const data = await response.json();
-            setPlaying(data.results.slice(6, 12));
+            setPlaying(data.results.slice(5, 12));
         } catch (error) {
             console.error(error);
         } finally {
@@ -34,7 +34,7 @@ export function CardPanel() {
     };
 
     return (
-        <div className="relative w-full h-150 overflow-hidden rounded-2xl">
+        <div className="relative w-full h-150 overflow-hidden rounded-xl">
 
             {/* Loading */}
             {isLoading && (
@@ -72,7 +72,7 @@ export function CardPanel() {
             {/* Prev Button */}
             <button
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/25 backdrop-blur-sm text-white rounded-full w-10 h-10 flex items-center justify-center transition border border-white/20"
+                className="absolute curosr-pointer left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/25 backdrop-blur-sm text-white rounded-full w-10 h-10 flex items-center justify-center transition border border-white/20"
             >
                 ‹
             </button>
@@ -80,7 +80,7 @@ export function CardPanel() {
             {/* Next Button */}
             <button
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/25 backdrop-blur-sm text-white rounded-full w-10 h-10 flex items-center justify-center transition border border-white/20"
+                className="absolute cursor-pointer right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/25 backdrop-blur-sm text-white rounded-full w-10 h-10 flex items-center justify-center transition border border-white/20"
             >
                 ›
             </button>
@@ -92,7 +92,7 @@ export function CardPanel() {
                         key={index}
                         onClick={() => setCurrentIndex(index)}
                         className={`h-1.5 rounded-full transition-all duration-300 ${
-                            index === currentIndex ? "bg-white w-6" : "bg-white/40 w-2.5"
+                            index === currentIndex ? "bg-white w-10" : "bg-white/40 w-2.5"
                         }`}
                     />
                 ))}
