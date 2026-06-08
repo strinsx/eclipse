@@ -30,3 +30,13 @@ body {
   --font-poppins: var(--font-poppins);
   --font-montserrat: var(--font-montserrat);
 }
+
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

@@ -41,7 +41,7 @@ export function CardPanel() {
             {/* Loading */}
             {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-20">
-                    <p className="text-foreground text-lg font-semibold">Loading...</p>
+                    <p className="text-foreground text-md">Loading...</p>
                 </div>
             )}
 
