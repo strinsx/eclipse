@@ -5,6 +5,7 @@ export interface Movie {
     title: string,
     overview: string,
     popularity: number,
+    vote_average: number,
     poster_path: string,
     release_date: string,
 }
