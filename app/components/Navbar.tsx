@@ -10,32 +10,24 @@ const poppins = Poppins({
 
 export function Navbar() {
   return (
-    <nav className={`${poppins.className} flex items-center justify-between px-10 py-6 m-4`}>
-      {/* Left: Logo + Name + Nav Links */}
-      <div className="flex items-center gap-20">
-        <div className="flex items-center gap-3">
-          <Image
-            src={Icon}
-            alt="Logo"
-            width={50}
-            height={50}
-          />
-          <Link href="/" className="font-semibold text-2xl">Eclipse</Link>
-        </div>
+    <nav className={`${poppins.className} flex items-center px-10 py-6 m-4`}>
 
-        <div className="flex items-center gap-6">
-          <Link href="/">Home</Link>
-          <Link href="/genre">Movies</Link>
-          <Link href="/genre">TV Shows</Link>
-        </div>
+      {/* Left */}
+      <div className="flex-1 flex items-center gap-3">
+        <Image src={Icon} alt="Logo" width={50} height={50} />
+        <Link href="/" className="font-semibold text-2xl">Eclipse</Link>
       </div>
 
-      {/* Right: Search alone */}
-      <input
-        type="text"
-        placeholder="Search movies..."
-        className="border rounded-md px-3 py-2 w-75 text-sm"
-      />
+      {/* Center */}
+      <div className="flex-1 flex items-center justify-center gap-6">
+        <Link href="/" className="text-foreground/70 hover:text-foreground transition">Home</Link>
+        <Link href="/genre" className="text-foreground/70 hover:text-foreground transition">Movies</Link>
+        <Link href="/genre" className="text-foreground/70 hover:text-foreground transition">TV Shows</Link>
+      </div>
+
+      {/* Right */}
+      <div className="flex-1" />
+
     </nav>
   );
 }
