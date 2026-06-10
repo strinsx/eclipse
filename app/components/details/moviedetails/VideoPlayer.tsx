@@ -4,12 +4,13 @@ import Image from "next/image";
 import { useState } from "react";
 
 interface Props {
+    id: number
     title: string;
     release_date: string;
     backdrop_path: string;
 }
 
-export function VideoPlayer({ title, release_date, backdrop_path }: Props) {
+export function VideoPlayer({ title, release_date, backdrop_path, id }: Props) {
     const [playing, setPlaying] = useState(false);
 
     return (
@@ -38,7 +39,7 @@ export function VideoPlayer({ title, release_date, backdrop_path }: Props) {
             ) : (
                 <iframe
                     className="w-full h-full"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+                    src={`https://vidsrc-embed.ru/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1`}
                     allow="autoplay; fullscreen"
                     allowFullScreen
                 />
