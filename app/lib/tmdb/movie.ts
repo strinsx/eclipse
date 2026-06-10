@@ -21,14 +21,21 @@ export async function getGenres() {
 
 }
 
-export async function getSimilar() {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/550/similar?api_key=${API_KEY}&language=en-US&page=1`) 
+export async function getSimilar(movieId: number) {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${API_KEY}&language=en-US&page=1`) 
 
         //MOCK DATA MOVIEID STILL 550
 
         const data = await response.json();
         return (data);
 }
+
+export async function getDetails(movieId: number) {
+
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US';`)
+    return await response.json();
+
+}   
 
 export async function searchbyID() {
 
