@@ -12,6 +12,9 @@ interface Props {
 }
 
 export function SimilarMovies({ movies }: Props) {
+
+     if (!movies || !Array.isArray(movies)) return null; 
+
     return (
         <div className="flex flex-col gap-3 w-full">
             <h2 className="text-foreground font-bold text-sm flex items-center gap-2">
@@ -19,7 +22,7 @@ export function SimilarMovies({ movies }: Props) {
             </h2>
 
             <div className="flex flex-col gap-3">
-                {movies.map((s) => (
+                {movies.slice(0,6).map((s) => (
                     <div
                         key={s.id}
                         className="group flex items-center gap-3 cursor-pointer hover:bg-foreground/5 rounded-xl p-2 transition"
