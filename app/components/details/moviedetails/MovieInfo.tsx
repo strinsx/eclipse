@@ -1,12 +1,15 @@
+import Image from "next/image";
+
 interface Props {
     title: string;
     release_date: string;
     runtime: number;
     vote_average: number;
     overview: string;
+    poster_path: string,
 }
 
-export function MovieInfo({ title, release_date, runtime, vote_average, overview }: Props) {
+export function MovieInfo({ title, release_date, runtime, vote_average, overview, poster_path }: Props) {
     return (
         <div className="flex flex-col gap-3">
             <h1 className="text-foreground text-3xl font-bold">
@@ -14,6 +17,7 @@ export function MovieInfo({ title, release_date, runtime, vote_average, overview
             </h1>
 
             <div className="flex items-center gap-5 text-sm">
+
                 <span className="flex items-center gap-1 text-amber-400">
                     ★ <span className="text-foreground/80">{vote_average.toFixed(1)}</span>
                 </span>
