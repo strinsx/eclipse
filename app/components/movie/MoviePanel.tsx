@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Movie } from "../../types/movie";
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
+import Link from "next/link";
 
 export function MoviePanel() {
 
@@ -76,7 +77,11 @@ export function MoviePanel() {
                         className="flex gap-4"
                     >
                         {movie.map((m, index) => (
-                            <motion.div
+                            <Link href={`/homepage/movies/${m.id}`}
+                            key={m.id}
+                            >
+
+                                <motion.div
                                 key={m.id}
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -117,6 +122,9 @@ export function MoviePanel() {
                                     </span>
                                 </div>
                             </motion.div>
+                            
+                            
+                            </Link>
                         ))}
                     </motion.div>
                 </div>
