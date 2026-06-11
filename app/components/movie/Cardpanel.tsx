@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
 import { Carousel } from "../../types/movie";
+import Link from "next/link";
 import Image from "next/image";
 
 export function CardPanel() {
@@ -36,8 +37,7 @@ export function CardPanel() {
     const currentMovie = playing[currentIndex];
 
     return (
-        <div className="relative w-full h-150 overflow-hidden rounded-xl group">
-
+        <div className="relative w-full h-64 sm:h-96 md:h-150 overflow-hidden rounded-xl group">
             {/* Loading */}
             {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-20">
@@ -47,6 +47,8 @@ export function CardPanel() {
 
             {/* Slides */}
             {playing.map((movie, index) => (
+
+
                 <div
                     key={movie.id}
                     className={`absolute inset-0 transition-opacity duration-700 ${index === currentIndex ? "opacity-100" : "opacity-0"
@@ -68,6 +70,7 @@ export function CardPanel() {
                     {/* Side gradients */}
                     <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40 z-10" />
                 </div>
+
             ))}
 
             {/* Movie Info */}
@@ -91,14 +94,19 @@ export function CardPanel() {
                     </p>
 
                     <div className="flex items-center gap-3">
-                        <button className="cursor-pointer flex items-center gap-2 bg-foreground text-background font-semibold px-5 py-2 rounded-full hover:opacity-90 transition text-sm">
-                            ▶ Play Now
-                        </button>
+                        <Link href={`/homepage/movies/${currentMovie.id}`}>
+                            <button className="cursor-pointer flex items-center gap-2 bg-foreground text-background font-semibold px-5 py-2 rounded-full hover:opacity-90 transition text-sm">
+                                ▶ Play Now
+                            </button>
+                        </Link>
+
                         <button className="cursor-pointer flex items-center gap-2 bg-foreground/10 backdrop-blur-sm text-foreground font-semibold px-5 py-2 rounded-full hover:bg-foreground/20 transition text-sm border border-foreground/20">
                             + Play Later
                         </button>
                     </div>
                 </div>
+
+
             )}
 
             {/* Prev Button */}
