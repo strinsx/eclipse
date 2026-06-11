@@ -52,7 +52,7 @@ export function MoviePanel() {
 
     return (
         <div className="m-3 py-6">
-            <h1 className="text-foreground text-2xl font-bold tracking-tight mb-4">
+            <h1 className="text-white text-2xl font-bold tracking-tight mb-4">
                 New Movies
             </h1>
 

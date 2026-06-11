@@ -85,7 +85,7 @@ export function CardPanel() {
                         </span>
                     </div>
 
-                    <h2 className="text-foreground text-3xl font-bold mb-2 drop-shadow-lg">
+                    <h2 className="text-white text-3xl font-bold mb-2 drop-shadow-lg">
                         {currentMovie.title}
                     </h2>
 
@@ -95,12 +95,12 @@ export function CardPanel() {
 
                     <div className="flex items-center gap-3">
                         <Link href={`/homepage/movies/${currentMovie.id}`}>
-                            <button className="cursor-pointer flex items-center gap-2 bg-foreground text-background font-semibold px-5 py-2 rounded-full hover:opacity-90 transition text-sm">
+                            <button className="cursor-pointer flex items-center gap-2 bg-foreground text-white font-semibold px-5 py-2 rounded-full hover:opacity-90 transition text-sm">
                                 ▶ Play Now
                             </button>
                         </Link>
 
-                        <button className="cursor-pointer flex items-center gap-2 bg-foreground/10 backdrop-blur-sm text-foreground font-semibold px-5 py-2 rounded-full hover:bg-foreground/20 transition text-sm border border-foreground/20">
+                        <button className="cursor-pointer flex items-center gap-2 bg-foreground/10 backdrop-blur-sm text-white font-semibold px-5 py-2 rounded-full hover:bg-foreground/20 transition text-sm border border-foreground/20">
                             + Play Later
                         </button>
                     </div>

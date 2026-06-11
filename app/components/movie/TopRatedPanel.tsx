@@ -25,7 +25,7 @@ export function TopRatedPanel() {
 
     return (
         <div className="m-3 py-6">
-            <h1 className="text-foreground text-lg font-bold tracking-tight mb-4">
+            <h1 className="text-white text-lg font-bold tracking-tight mb-4">
                 Top Rated
             </h1>
 
