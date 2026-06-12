@@ -12,7 +12,7 @@ export function CardPanel() {
     const fetchData = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch('http://localhost:3000/api/movies/playing');
+            const response = await fetch('/api/movies/playing');
             const data = await response.json();
             setPlaying(data.results.slice(5, 12));
         } catch (error) {
