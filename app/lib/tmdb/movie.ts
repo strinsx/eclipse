@@ -38,6 +38,12 @@ export async function getDetails(movieId: number) {
 
 }
 
+export async function getCredits(movieId: number) {
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`);
+    const data = await res.json();
+    return data.cast;
+}
+
 export async function searchbyID() {
 
     const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=spiderman&api_key=${API_KEY}&include_adult=false&language=en-US&page=1`)
