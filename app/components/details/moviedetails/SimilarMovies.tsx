@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface Movie {
     id: number;
@@ -23,6 +24,10 @@ export function SimilarMovies({ movies }: Props) {
 
             <div className="flex flex-col gap-3">
                 {movies.slice(0,6).map((s) => (
+
+                    <Link href={`/homepage/movies/${s.id}/onboarding`} key={s.id}>
+
+                    
                     <div
                         key={s.id}
                         className="group flex items-center gap-3 cursor-pointer hover:bg-foreground/5 rounded-xl p-2 transition"
@@ -44,6 +49,8 @@ export function SimilarMovies({ movies }: Props) {
                             </span>
                         </div>
                     </div>
+
+                   </Link>
                 ))}
             </div>
         </div>

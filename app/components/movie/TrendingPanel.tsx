@@ -33,7 +33,7 @@ export function TrendingPanel() {
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-4">
                 {trending.slice(0, 14).map((m, index) => (
 
-                    <Link href={`/homepage/movies/${m.id}`} key={m.id}>
+                    <Link href={`/homepage/movies/${m.id}/onboarding`} key={m.id}>
 
                         <motion.div
                             key={m.id}
