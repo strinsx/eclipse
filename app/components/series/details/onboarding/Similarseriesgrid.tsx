@@ -19,7 +19,7 @@ export function SimilarSeriesGrid({ series }: Props) {
     return (
         <div className="py-6">
             <h2 className="text-foreground font-bold text-lg mb-4 flex items-center gap-2">
-                <span>📺</span> Similar Series
+                 Similar Series
             </h2>
 
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">

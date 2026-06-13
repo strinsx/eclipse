@@ -38,7 +38,7 @@ export function SeriesHeader({
             {/* Backdrop image */}
             <Image
                 src={`https://image.tmdb.org/t/p/original${backdrop_path}`}
-                alt={name}
+                alt={name || "badkrop alt"}
                 fill
                 className="object-cover object-top saturate-160"
                 priority
@@ -56,7 +56,7 @@ export function SeriesHeader({
                 <div className="flex-shrink-0 w-[200px] h-[350px] relative rounded-xl overflow-hidden shadow-2xl hidden sm:block">
                     <Image
                         src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                        alt={name}
+                        alt={name || "Poster alt"}
                         fill
                         className="object-cover"
                     />
@@ -88,7 +88,7 @@ export function SeriesHeader({
                     {/* Meta row */}
                     <div className="flex items-center gap-3 text-xs text-foreground/60 flex-wrap">
                         <span className="flex items-center gap-1 bg-amber-500/20 text-amber-400 font-bold px-2 py-0.5 rounded-md">
-                            ★ {vote_average.toFixed(1)}
+                            ★ {vote_average}
                             <span className="text-amber-400/60 font-normal">/10</span>
                         </span>
                         <span>📅 {year}</span>
