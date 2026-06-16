@@ -8,14 +8,16 @@ interface Props {
     name: string;
     first_air_date: string;
     backdrop_path: string;
+    season: number;
+    episode: number;
 }
 
-export function SeriesVideoPlayer({ name, first_air_date, backdrop_path, id }: Props) {
+export function SeriesVideoPlayer({ name, first_air_date, backdrop_path, id, season, episode }: Props) {
     const [playing, setPlaying] = useState(false);
 
     return (
         <div
-            className="relative w-300 aspect-video rounded-xl overflow-hidden bg-black group cursor-pointer"
+            className="relative w-250 aspect-video rounded-xl overflow-hidden bg-black group cursor-pointer"
             onClick={() => setPlaying(true)}
         >
             {!playing ? (
@@ -36,7 +38,7 @@ export function SeriesVideoPlayer({ name, first_air_date, backdrop_path, id }: P
             ) : (
                 <iframe
                     className="w-full h-full"
-                    src={`https://vsembed.ru/embed/tv?tmdb=${id}&season=1&episode=1`}
+                    src={`https://vsembed.ru/embed/tv?tmdb=${id}&season=${season}&episode=${episode}&autoplay=1`}
                     allow="autoplay; fullscreen"
                     allowFullScreen
                 />
