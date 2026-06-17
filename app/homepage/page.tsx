@@ -6,11 +6,14 @@ import { Footer } from '../components/Footer'
 import { TopRatedPanel } from "../components/movie/TopRatedPanel";
 import { OnAirTv } from "../components/series/OnAir";
 import { TrendingPanelTV } from "../components/series/TrendingPanelTV";
+import { Searchpanel } from "../components/movie/Searchpanel";
 export default function Homepage() {
   return (
     <div className="flex flex-col w-full md:w-[85%] lg:w-[70%] mx-auto min-h-screen">
       <Navbar />
       <CardPanel />
+      <Searchpanel />
+
       <MoviePanel />
       <TrendingPanel />
       <TopRatedPanel />
