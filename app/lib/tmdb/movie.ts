@@ -44,14 +44,12 @@ export async function getCredits(movieId: number) {
     return data.cast;
 }
 
-export async function searchbyID() {
+export async function getMovie(title: string) {
 
-    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=spiderman&api_key=${API_KEY}&include_adult=false&language=en-US&page=1`)
+    const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${title}&api_key=${API_KEY}&include_adult=false&language=en-US&page=1`)
     const data = await response.json();
     return (data);
 
-
-    // MOCK DATA FROM SPIDERMAN STILL NEED A LOOK INTO
 
 }
 
