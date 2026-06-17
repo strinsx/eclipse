@@ -26,8 +26,8 @@ export function Navbar() {
       {/* Center — desktop only */}
       <div className="hidden md:flex flex-1 items-center justify-center gap-6">
         <Link href="/" className="text-foreground/70 hover:text-foreground transition">Home</Link>
-        <Link href="/genre" className="text-foreground/70 hover:text-foreground transition">Movies</Link>
-        <Link href="/genre" className="text-foreground/70 hover:text-foreground transition">TV Shows</Link>
+        {/* <Link href="/genre" className="text-foreground/70 hover:text-foreground transition">Movies</Link>
+        <Link href="/genre" className="text-foreground/70 hover:text-foreground transition">TV Shows</Link> */}
       </div>
 
       <div className="flex-1 hidden md:block" />
