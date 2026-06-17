@@ -116,7 +116,7 @@ export function SeriesHeader({
                     {/* Action buttons */}
                     <div className="flex items-center gap-3 mt-2 flex-wrap">
                         <Link href={`/homepage/series/${id}/watch`}>
-                            <button className="flex items-center cursor-pointer gap-2 bg-foreground hover:bg-foreground/50 text-white font-semibold px-5 py-2 rounded-full transition text-sm">
+                            <button className="flex items-center cursor-pointer gap-2 bg-background hover:bg-foreground/50 text-white font-semibold px-5 py-2 rounded-full transition text-sm">
                                 ▶ Watch Now
                             </button>
                         </Link>
