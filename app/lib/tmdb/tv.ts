@@ -36,7 +36,7 @@ export async function getDetails(id: number) {
 }
 
 export async function getSeries(title: string) {
-    const response = await fetch(`https://api.themoviedb.org/3/search/tv?query=${title}&include_adult=false&language=en-US&page=1'`)
+    const response = await fetch(`https://api.themoviedb.org/3/search/tv?query=${title}&api_key=${API_KEY}&include_adult=false&language=en-US&page=1`)
     const data = await response.json()
     return (data)
 }
