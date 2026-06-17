@@ -9,7 +9,7 @@ import { TrendingPanelTV } from "../components/series/TrendingPanelTV";
 import { Searchpanel } from "../components/movie/Searchpanel";
 export default function Homepage() {
   return (
-    <div className="flex flex-col w-full md:w-[85%] lg:w-[70%] mx-auto min-h-screen">
+    <div className="flex flex-col w-full px-4 md:px-0 md:w-[85%] lg:w-[70%] mx-auto min-h-screen">
       <Navbar />
       <CardPanel />
       <Searchpanel />

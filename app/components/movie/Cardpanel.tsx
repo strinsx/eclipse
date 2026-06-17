@@ -39,7 +39,7 @@ export function CardPanel() {
     const currentMovie = playing[currentIndex];
 
     return (
-        <div className="relative w-full h-64 sm:h-96 md:h-150 overflow-hidden rounded-xl group">
+        <div className="relative w-full h-56 sm:h-80 md:h-96 lg:h-150 overflow-hidden rounded-xl group">
             {/* Loading */}
             {isLoading && (
                 <div className="absolute inset-0 flex items-center justify-center bg-background/80 z-20">
@@ -77,7 +77,7 @@ export function CardPanel() {
 
             {/* Movie Info */}
             {currentMovie && (
-                <div className="absolute bottom-14 left-8 z-20 max-w-lg">
+                <div className="absolute bottom-10 sm:bottom-14 left-4 sm:left-8 z-20 max-w-lg">
                     <div className="flex items-center gap-2 mb-2">
                         <span className="text-xs uppercase tracking-widest text-foreground/60 border border-foreground/20 px-2 py-0.5 rounded-full">
                             {currentMovie.original_language.toUpperCase()}
@@ -87,17 +87,17 @@ export function CardPanel() {
                         </span>
                     </div>
 
-                    <h2 className="text-white text-3xl font-bold mb-2 drop-shadow-lg">
+                    <h2 className="text-white text-lg sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 drop-shadow-lg">
                         {currentMovie.title}
                     </h2>
 
-                    <p className="text-foreground/70 text-sm leading-relaxed line-clamp-2 mb-4">
+                    <p className="text-foreground/70 text-xs sm:text-sm leading-relaxed line-clamp-2 mb-3 sm:mb-4">
                         {currentMovie.overview}
                     </p>
 
                     <div className="flex items-center gap-3">
                         <Link href={`/homepage/movies/${currentMovie.id}/onboarding`}>
-                            <button className="cursor-pointer flex items-center gap-2 bg-background hover:bg-background/50 text-white font-semibold px-5 py-2 rounded-full hover:opacity-90 transition text-sm">
+                            <button className="cursor-pointer flex items-center gap-2 bg-background hover:bg-background/50 text-white font-semibold px-3 sm:px-5 py-1.5 sm:py-2 rounded-full hover:opacity-90 transition text-xs sm:text-sm">
                                 <FontAwesomeIcon icon={faPlay} className="text-xs" /> Play Now
                             </button>
                         </Link>
@@ -114,7 +114,7 @@ export function CardPanel() {
             {/* Prev Button */}
             <button
                 onClick={prevSlide}
-                className="absolute cursor-pointer left-4 top-1/2 -translate-y-1/2 z-20 bg-foreground/10 hover:bg-foreground/25 backdrop-blur-sm text-foreground rounded-full w-10 h-10 flex items-center justify-center transition border border-foreground/20"
+                className="absolute cursor-pointer left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-foreground/10 hover:bg-foreground/25 backdrop-blur-sm text-foreground rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transition border border-foreground/20"
             >
                 ‹
             </button>
@@ -122,7 +122,7 @@ export function CardPanel() {
             {/* Next Button */}
             <button
                 onClick={nextSlide}
-                className="absolute cursor-pointer right-4 top-1/2 -translate-y-1/2 z-20 bg-foreground/10 hover:bg-foreground/25 backdrop-blur-sm text-foreground rounded-full w-10 h-10 flex items-center justify-center transition border border-foreground/20"
+                className="absolute cursor-pointer right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-foreground/10 hover:bg-foreground/25 backdrop-blur-sm text-foreground rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transition border border-foreground/20"
             >
                 ›
             </button>
