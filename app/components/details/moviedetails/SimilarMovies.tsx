@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface Movie {
     id: number;
@@ -19,7 +21,7 @@ export function SimilarMovies({ movies }: Props) {
     return (
         <div className="flex flex-col gap-3 w-full">
             <h2 className="text-foreground font-bold text-sm flex items-center gap-2">
-                <span className="text-blue-400">🎬</span> Similar Movies
+                <FontAwesomeIcon icon={faFilm} className="text-blue-400 text-sm" /> Similar Movies
             </h2>
 
             <div className="flex flex-col gap-3">
@@ -45,7 +47,7 @@ export function SimilarMovies({ movies }: Props) {
                                 {s.title}
                             </h3>
                             <span className="text-amber-400 text-xs flex items-center gap-1">
-                                ★ {s.vote_average.toFixed(1)}
+                                <FontAwesomeIcon icon={faStar} className="text-xs" /> {s.vote_average.toFixed(1)}
                             </span>
                         </div>
                     </div>

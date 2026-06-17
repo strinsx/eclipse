@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
     title: string;
@@ -19,13 +21,13 @@ export function MovieInfo({ title, release_date, runtime, vote_average, overview
             <div className="flex items-center gap-3 sm:gap-5 text-xs sm:text-sm flex-wrap">
 
                 <span className="flex items-center gap-1 text-amber-400">
-                    ★ <span className="text-foreground/80">{vote_average.toFixed(1)}</span>
+                    <FontAwesomeIcon icon={faStar} className="text-xs" /> <span className="text-foreground/80">{vote_average.toFixed(1)}</span>
                 </span>
                 <span className="flex items-center gap-1 text-foreground/50">
-                    🗓 {release_date.slice(0, 4)}
+                    <FontAwesomeIcon icon={faCalendar} className="text-xs" /> {release_date.slice(0, 4)}
                 </span>
                 <span className="flex items-center gap-1 text-foreground/50">
-                    🕐 {runtime} min
+                    <FontAwesomeIcon icon={faClock} className="text-xs" /> {runtime} min
                 </span>
             </div>
 

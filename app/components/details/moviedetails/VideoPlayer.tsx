@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
     id: number
@@ -30,7 +32,7 @@ export function VideoPlayer({ title, release_date, backdrop_path, id }: Props) {
                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition duration-300" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 sm:gap-3">
                         <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center hover:bg-white/40 active:bg-white/50 transition-all duration-200">
-                            <span className="text-white text-xl sm:text-2xl ml-0.5 font-bold">▶</span>
+                            <FontAwesomeIcon icon={faPlay} className="text-white text-xl sm:text-2xl ml-0.5" />
                         </div>
                         <span className="text-white text-xs sm:text-sm font-medium opacity-80 mt-2 px-2 text-center leading-tight">
                             {title} <span className="hidden sm:inline">({release_date.slice(0, 4)})</span>

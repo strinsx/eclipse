@@ -13,6 +13,8 @@ interface Props {
 }
 
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export function SeriesDetailsInfo({
     id,
@@ -79,7 +81,7 @@ export function SeriesDetailsInfo({
                     <div className="flex flex-col gap-1">
                         <span className="text-foreground/40 text-xs uppercase tracking-widest font-semibold">Rating</span>
                         <span className="text-amber-400 text-sm sm:text-base font-semibold flex items-center gap-1">
-                            ★ {vote_average.toFixed(1)}
+                            <FontAwesomeIcon icon={faStar} className="text-xs" /> {vote_average.toFixed(1)}
                         </span>
                     </div>
 

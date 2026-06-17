@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { MovieDetails } from "../../../types/movie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
     genres: { id: number; name: string }[];
@@ -54,7 +56,7 @@ export function MovieDetailsInfo({ poster_path, genres, release_date, runtime, v
                 </div>
                 <div className="flex flex-col gap-1">
                     <span className="text-foreground/40 text-xs uppercase tracking-widest">Vote Average</span>
-                    <span className="text-amber-400 text-sm font-semibold">★ {vote_average.toFixed(1)}</span>
+                    <span className="text-amber-400 text-sm font-semibold flex items-center gap-1"><FontAwesomeIcon icon={faStar} className="text-xs" /> {vote_average.toFixed(1)}</span>
                 </div>
                 <div className="flex flex-col gap-1">
                     <span className="text-foreground/40 text-xs uppercase tracking-widest">Vote Count</span>

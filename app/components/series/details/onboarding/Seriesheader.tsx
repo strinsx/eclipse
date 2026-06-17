@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faCalendar, faFilm, faTv, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
     id: number;
@@ -71,7 +73,7 @@ export function SeriesHeader({
                             TV Series
                         </span>
                         <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 font-semibold flex items-center gap-1">
-                            ⭐ Top Rated
+                            <FontAwesomeIcon icon={faStar} className="text-xs" /> Top Rated
                         </span>
                     </div>
 
@@ -88,12 +90,12 @@ export function SeriesHeader({
                     {/* Meta row */}
                     <div className="flex items-center gap-3 text-xs text-foreground/60 flex-wrap">
                         <span className="flex items-center gap-1 bg-amber-500/20 text-amber-400 font-bold px-2 py-0.5 rounded-md">
-                            ★ {vote_average}
+                            <FontAwesomeIcon icon={faStar} className="text-xs" /> {vote_average}
                             <span className="text-amber-400/60 font-normal">/10</span>
                         </span>
-                        <span>📅 {year}</span>
-                        <span>🎞 {number_of_seasons} Season{number_of_seasons !== 1 ? "s" : ""}</span>
-                        <span>📺 {number_of_episodes} Episodes</span>
+                        <span className="flex items-center gap-1"><FontAwesomeIcon icon={faCalendar} className="text-xs" /> {year}</span>
+                        <span className="flex items-center gap-1"><FontAwesomeIcon icon={faFilm} className="text-xs" /> {number_of_seasons} Season{number_of_seasons !== 1 ? "s" : ""}</span>
+                        <span className="flex items-center gap-1"><FontAwesomeIcon icon={faTv} className="text-xs" /> {number_of_episodes} Episodes</span>
                     </div>
 
                     {/* Genres */}
@@ -117,7 +119,7 @@ export function SeriesHeader({
                     <div className="flex items-center gap-3 mt-2 flex-wrap">
                         <Link href={`/homepage/series/${id}/watch`}>
                             <button className="flex items-center cursor-pointer gap-2 bg-background hover:bg-foreground/50 text-white font-semibold px-5 py-2 rounded-full transition text-sm">
-                                ▶ Watch Now
+                                <FontAwesomeIcon icon={faPlay} className="text-xs" /> Watch Now
                             </button>
                         </Link>
                     </div>

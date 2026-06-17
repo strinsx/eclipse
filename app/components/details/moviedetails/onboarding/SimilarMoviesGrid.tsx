@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface Movie {
     id: number;
@@ -19,7 +21,7 @@ export function SimilarMoviesGrid({ movies }: Props) {
     return (
         <div className="py-6">
             <h2 className="text-foreground font-bold text-lg mb-4 flex items-center gap-2">
-                <span>🎬</span> Similar Movies
+                <FontAwesomeIcon icon={faFilm} className="text-lg" /> Similar Movies
             </h2>
 
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
@@ -36,13 +38,13 @@ export function SimilarMoviesGrid({ movies }: Props) {
                                     />
                                 ) : (
                                     <div className="w-full h-full bg-foreground/10 flex items-center justify-center text-foreground/20">
-                                        🎬
+                                        <FontAwesomeIcon icon={faFilm} className="text-foreground/20 text-lg" />
                                     </div>
                                 )}
 
                                 {/* Rating badge */}
                                 <div className="absolute top-2 right-2 z-10 bg-background/70 backdrop-blur-sm text-amber-400 text-xs font-semibold px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
-                                    ★ {m.vote_average.toFixed(1)}
+                                    <FontAwesomeIcon icon={faStar} className="text-xs" /> {m.vote_average.toFixed(1)}
                                 </div>
                             </div>
 

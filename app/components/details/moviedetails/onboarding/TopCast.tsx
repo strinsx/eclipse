@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUsers, faUser } from "@fortawesome/free-solid-svg-icons";
 
 interface CastMember {
     id: number;
@@ -15,7 +17,7 @@ export function TopCast({ cast }: Props) {
     return (
         <div className="py-6">
             <h2 className="text-foreground font-bold text-lg mb-4 flex items-center gap-2">
-                <span>👥</span> Top Cast
+                <FontAwesomeIcon icon={faUsers} className="text-lg" /> Top Cast
             </h2>
 
             <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
@@ -35,7 +37,7 @@ export function TopCast({ cast }: Props) {
                                 />
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center text-foreground/20 text-2xl">
-                                    👤
+                                    <FontAwesomeIcon icon={faUser} className="text-foreground/20 text-2xl" />
                                 </div>
                             )}
                         </div>

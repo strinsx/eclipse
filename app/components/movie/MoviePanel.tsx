@@ -5,6 +5,8 @@ import { Movie } from "../../types/movie";
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export function MoviePanel() {
 
@@ -105,7 +107,7 @@ export function MoviePanel() {
 
                                     {/* Star badge */}
                                     <div className="absolute top-2 right-2 z-10 bg-background/60 backdrop-blur-sm text-amber-200 text-xs font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
-                                        ★ {m.popularity.toFixed(1)}
+                                        <FontAwesomeIcon icon={faStar} className="text-xs" /> {m.popularity.toFixed(1)}
                                     </div>
 
                                     {/* Bottom gradient overlay */}

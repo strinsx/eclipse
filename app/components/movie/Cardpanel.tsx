@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Carousel } from "../../types/movie";
 import Link from "next/link";
 import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 export function CardPanel() {
     const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +83,7 @@ export function CardPanel() {
                             {currentMovie.original_language.toUpperCase()}
                         </span>
                         <span className="text-xs text-foreground/50">
-                            ★ {currentMovie.popularity.toFixed(1)}
+                            <FontAwesomeIcon icon={faStar} className="text-amber-400 mr-1" />{currentMovie.popularity.toFixed(1)}
                         </span>
                     </div>
 
@@ -96,7 +98,7 @@ export function CardPanel() {
                     <div className="flex items-center gap-3">
                         <Link href={`/homepage/movies/${currentMovie.id}/onboarding`}>
                             <button className="cursor-pointer flex items-center gap-2 bg-background hover:bg-background/50 text-white font-semibold px-5 py-2 rounded-full hover:opacity-90 transition text-sm">
-                                ▶ Play Now
+                                <FontAwesomeIcon icon={faPlay} className="text-xs" /> Play Now
                             </button>
                         </Link>
 

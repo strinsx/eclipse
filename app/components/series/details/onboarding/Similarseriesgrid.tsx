@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface Series {
     id: number;
@@ -42,7 +44,7 @@ export function SimilarSeriesGrid({ series }: Props) {
 
                                 {/* Rating badge */}
                                 <div className="absolute top-2 right-2 z-10 bg-background/70 backdrop-blur-sm text-amber-400 text-xs font-semibold px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
-                                    ★ {s.vote_average.toFixed(1)}
+                                    <FontAwesomeIcon icon={faStar} className="text-xs" /> {s.vote_average.toFixed(1)}
                                 </div>
                             </div>
 
