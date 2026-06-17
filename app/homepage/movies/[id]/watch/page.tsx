@@ -18,14 +18,11 @@ export default async function MoviePage({
   const similar = await getSimilar(Number(id));
 
   return (
-    <div className="flex flex-col w-[70%] mx-auto min-h-screen">
+    <div className="flex flex-col w-full px-4 md:px-0 md:w-[85%] lg:w-[70%] mx-auto min-h-screen">
 
+      <Navbar />
 
-      {/* Left — takes up most of the width */}
       <div className="flex-1 flex flex-col gap-4 min-w-0">
-
-        <Navbar />
-
 
         <VideoPlayer
           title={movie.title}
@@ -34,9 +31,9 @@ export default async function MoviePage({
           id={movie.id}
         />
 
-        <div className="flex justify-between mt-10">
+        <div className="flex flex-col lg:flex-row justify-between gap-4 lg:gap-6 mt-6 md:mt-10">
 
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start flex-1 min-w-0">
             <MovieInfo
               title={movie.title}
               release_date={movie.release_date}
@@ -47,7 +44,6 @@ export default async function MoviePage({
             />
 
             <MovieDetailsInfo
-
               poster_path={movie.poster_path}
               genres={movie.genres}
               runtime={movie.runtime}
@@ -58,20 +54,15 @@ export default async function MoviePage({
               revenue={movie.revenue}
               production_companies={movie.production_companies}
               production_countries={movie.production_countries}
-
-
             />
-
           </div>
 
-          {/* Right — fixed width similar to screenshot */}
-          <div className="w-[600px] flex-shrink-0">
+          <div className="w-full lg:w-[300px] xl:w-[400px] flex-shrink-0">
             <SimilarMovies movies={similar} />
           </div>
         </div>
 
       </div>
-
 
       <footer>
         <Footer />
