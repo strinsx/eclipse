@@ -15,7 +15,7 @@ export function VideoPlayer({ title, release_date, backdrop_path, id }: Props) {
 
     return (
         <div
-            className="relative w-300 aspect-video rounded-xl overflow-hidden bg-black group cursor-pointer"
+            className="relative w-full aspect-video rounded-lg sm:rounded-xl overflow-hidden bg-black group cursor-pointer shadow-lg hover:shadow-xl transition-shadow duration-300"
             onClick={() => setPlaying(true)}
         >
             {!playing ? (
@@ -25,24 +25,29 @@ export function VideoPlayer({ title, release_date, backdrop_path, id }: Props) {
                         alt={title}
                         fill
                         className="object-cover saturate-60 group-hover:saturate-100 transition duration-500"
+                        priority
                     />
-                    <div className="absolute inset-0 bg-black/30" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                        <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center hover:bg-white/30 transition">
-                            <span className="text-white text-2xl ml-1">▶</span>
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition duration-300" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 sm:gap-3">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center hover:bg-white/40 active:bg-white/50 transition-all duration-200">
+                            <span className="text-white text-xl sm:text-2xl ml-0.5 font-bold">▶</span>
                         </div>
-                        <span className="text-white/70 text-sm">
-                            {title} ({release_date.slice(0, 4)})
+                        <span className="text-white text-xs sm:text-sm font-medium opacity-80 mt-2 px-2 text-center leading-tight">
+                            {title} <span className="hidden sm:inline">({release_date.slice(0, 4)})</span>
                         </span>
                     </div>
                 </>
             ) : (
-                <iframe
-                    className="w-full h-full"
-                    src={`https://vsembed.ru/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1`}
-                    allow="autoplay; fullscreen"
-                    allowFullScreen
-                />
+                <div className="w-full h-full bg-black flex items-center justify-center">
+                    <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src={`https://vsembed.ru/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                        allowFullScreen
+                        style={{ border: "none" }}
+                        title={title}
+                    />
+                </div>
             )}
         </div>
     );

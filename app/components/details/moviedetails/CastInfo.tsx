@@ -18,11 +18,13 @@ export function MovieDetailsInfo({ poster_path, genres, release_date, runtime, v
 
 
     return (
-        <div className="flex gap-5 mt-5">
+        <div className="flex flex-col md:flex-row gap-5 mt-5">
 
-            <Image src={`https://image.tmdb.org/t/p/original${poster_path}`} alt="poster_path" width={300} height={200}></Image>
+            <div className="relative w-full max-w-[200px] sm:max-w-[300px] aspect-[3/4] flex-shrink-0 mx-auto md:mx-0 rounded-lg overflow-hidden">
+                <Image src={`https://image.tmdb.org/t/p/original${poster_path}`} alt="poster_path" fill className="object-cover" />
+            </div>
 
-            <div className="flex flex-col gap-6 p-4">
+            <div className="flex flex-col gap-4 sm:gap-6 p-4">
 
 
             {/* Genres */}
@@ -41,7 +43,7 @@ export function MovieDetailsInfo({ poster_path, genres, release_date, runtime, v
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1">
                     <span className="text-foreground/40 text-xs uppercase tracking-widest">Release Date</span>
                     <span className="text-foreground text-sm font-semibold">{release_date}</span>

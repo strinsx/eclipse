@@ -12,11 +12,11 @@ interface Props {
 export function MovieInfo({ title, release_date, runtime, vote_average, overview, poster_path }: Props) {
     return (
         <div className="flex flex-col gap-3">
-            <h1 className="text-foreground text-3xl font-bold">
+            <h1 className="text-foreground text-xl sm:text-2xl md:text-3xl font-bold">
                 {title}
             </h1>
 
-            <div className="flex items-center gap-5 text-sm">
+            <div className="flex items-center gap-3 sm:gap-5 text-xs sm:text-sm flex-wrap">
 
                 <span className="flex items-center gap-1 text-amber-400">
                     ★ <span className="text-foreground/80">{vote_average.toFixed(1)}</span>
