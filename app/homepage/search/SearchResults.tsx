@@ -15,11 +15,20 @@ interface SearchResult {
     first_air_date?: string;
 }
 
+type Filter = "all" | "movie" | "tv";
+
+const FILTERS: { key: Filter; label: string }[] = [
+    { key: "all", label: "All" },
+    { key: "movie", label: "Movies" },
+    { key: "tv", label: "TV Series" },
+];
+
 export function SearchResults() {
     const searchParams = useSearchParams();
     const query = searchParams.get("query") || "";
     const [results, setResults] = useState<SearchResult[]>([]);
     const [loading, setLoading] = useState(false);
+    const [filter, setFilter] = useState<Filter>("all");
 
     useEffect(() => {
         if (!query.trim()) return;
@@ -44,6 +53,8 @@ export function SearchResults() {
         };
     }, [query]);
 
+    const filtered = filter === "all" ? results : results.filter((r) => r.media_type === filter);
+
     if (!query) {
         return (
             <div className="flex-1 flex items-center justify-center m-3">
@@ -57,21 +68,37 @@ export function SearchResults() {
             <h1 className="text-white text-2xl font-bold tracking-tight mb-2">
                 Results for &quot;{query}&quot;
             </h1>
-            <p className="text-foreground/50 text-sm mb-6">
-                {loading ? "Searching..." : `${results.length} result${results.length !== 1 ? "s" : ""} found`}
-            </p>
+
+            <div className="flex items-center gap-2 mb-6">
+                <p className="text-foreground/50 text-sm mr-2">
+                    {loading ? "Searching..." : `${filtered.length} result${filtered.length !== 1 ? "s" : ""} found`}
+                </p>
+                {FILTERS.map((f) => (
+                    <button
+                        key={f.key}
+                        onClick={() => setFilter(f.key)}
+                        className={`text-xs px-3 py-1.5 rounded-full transition-all duration-200 cursor-pointer ${
+                            filter === f.key
+                                ? "bg-blue-600 text-white shadow-md"
+                                : "bg-foreground/10 text-foreground/70 hover:bg-foreground/20"
+                        }`}
+                    >
+                        {f.label}
+                    </button>
+                ))}
+            </div>
 
             {loading ? (
                 <div className="flex items-center justify-center py-20">
                     <p className="text-foreground/50">Loading...</p>
                 </div>
-            ) : results.length === 0 ? (
+            ) : filtered.length === 0 ? (
                 <div className="flex items-center justify-center py-20">
                     <p className="text-foreground/50">No results found.</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
-                    {results.map((item, index) => (
+                    {filtered.map((item, index) => (
                         <Link
                             key={`${item.media_type}-${item.id}`}
                             href={
@@ -106,7 +133,7 @@ export function SearchResults() {
                                         </div>
                                     )}
                                     <div className="absolute top-2 right-2 z-10 bg-background/60 backdrop-blur-sm text-foreground/60 text-xs px-2 py-0.5 rounded-full capitalize">
-                                        {item.media_type}
+                                        {item.media_type === "movie" ? "Movie" : "TV"}
                                     </div>
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-10" />
                                 </div>

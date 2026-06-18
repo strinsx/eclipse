@@ -13,7 +13,7 @@ export default async function MoviePage({
   const series = await getDetails(Number(id));
 
   return (
-    <div className="flex flex-col w-[70%] mx-auto min-h-screen">
+    <div className="flex flex-col w-full px-4 md:px-0 md:w-[85%] lg:w-[70%] mx-auto min-h-screen">
       <Navbar />
       <WatchClient series={series} />
       <footer>
