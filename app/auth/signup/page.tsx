@@ -11,7 +11,7 @@ const poppins = Poppins({
 });
 
 export default function SignupPage() {
-  const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "", displayName: "" });
+  const [form, setForm] = useState({ email: "", password: "", confirm: "", displayName: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -32,40 +32,6 @@ export default function SignupPage() {
   const blurStyle = (e: React.FocusEvent<HTMLInputElement>) => {
     e.currentTarget.style.border = "1px solid rgba(212,175,55,0.2)";
     e.currentTarget.style.boxShadow = "none";
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-
-    if (form.password !== form.confirm) {
-      setError("Passwords do not match.");
-      return;
-    }
-    if (form.password.length < 8) {
-      setError("Password must be at least 8 characters.");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: form.name, email: form.email, password: form.password, displayName: form.displayName }),
-      });
-
-      if (!res.ok) {
-        const data = await res.json();
-        setError(data.message || "Could not create account.");
-      } else {
-        window.location.href = "/homepage";
-      }
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
   };
 
   const labelClass = "text-xs font-semibold uppercase tracking-widest";
@@ -135,24 +101,7 @@ export default function SignupPage() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             {/* Name */}
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="name" className={labelClass} style={labelStyle}>
-                Full Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                autoComplete="name"
-                required
-                value={form.name}
-                onChange={update("name")}
-                placeholder="John Doe"
-                className="w-full rounded-xl px-4 py-3 text-sm outline-none transition-all placeholder:text-white/25"
-                style={inputStyle}
-                onFocus={focusStyle}
-                onBlur={blurStyle}
-              />
-            </div>
+            
 
             {/* Display Name */}
             <div className="flex flex-col gap-1.5">
