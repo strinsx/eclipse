@@ -6,7 +6,7 @@ import { Poppins } from "next/font/google";
 import Icon from "../../public/eclipse.svg";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,6 +27,11 @@ export function Navbar() {
 
       {/* Center — desktop only */}
       <div className="hidden md:flex flex-1 items-center justify-center gap-6">
+
+      </div>
+
+      {/* Right — desktop */}
+      <div className="flex-1 hidden md:flex items-center justify-end gap-4">
         <Link href="/" className="text-foreground/70 hover:text-foreground transition flex items-center gap-1.5">
           <FontAwesomeIcon icon={faHouse} className="text-sm" />
           Home
@@ -34,11 +39,10 @@ export function Navbar() {
         <Link href="/homepage/search" className="text-foreground/70 flex items-center gap-2 flex-row-reverse hover:text-foreground transition"> Search
           <FontAwesomeIcon icon={faMagnifyingGlass} className="text-lg" />
         </Link>
-      </div>
-
-      {/* Right — desktop */}
-      <div className="flex-1 hidden md:flex items-center justify-end gap-4">
-
+        <Link href="/auth/login" className="text-foreground/70 hover:text-foreground transition flex items-center gap-1.5">
+          <FontAwesomeIcon icon={faUser} className="text-xs" />
+          Log in
+        </Link>
       </div>
 
       {/* Hamburger button — mobile only */}
@@ -59,6 +63,10 @@ export function Navbar() {
             Home
           </Link>
           <Link href="/homepage/search" onClick={() => setOpen(false)} className="text-foreground/70 hover:text-foreground transition text-sm">Search</Link>
+          <Link href="/auth/login" onClick={() => setOpen(false)} className="text-foreground/70 hover:text-foreground transition text-sm flex items-center gap-1.5">
+            <FontAwesomeIcon icon={faUser} className="text-xs" />
+            Log in
+          </Link>
         </div>
       )}
 
