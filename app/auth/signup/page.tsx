@@ -39,7 +39,31 @@ export default function SignupPage() {
     setLoading(true);
     setError("");
 
-    
+    if (form.password !== form.confirm) {
+      setError("Passwords do not match.");
+      setLoading(false);
+      return;
+    }
+
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: form.email,
+        password: form.password,
+        displayName: form.displayName,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.error);
+      setLoading(false);
+      return;
+    }
+
+    window.location.href = "/auth/login";
   };
 
   const labelClass = "text-xs font-semibold uppercase tracking-widest";
