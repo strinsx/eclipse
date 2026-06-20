@@ -34,6 +34,14 @@ export default function SignupPage() {
     e.currentTarget.style.boxShadow = "none";
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    
+  };
+
   const labelClass = "text-xs font-semibold uppercase tracking-widest";
   const labelStyle = { color: "rgba(212,175,55,0.7)" };
 
