@@ -1,6 +1,6 @@
 // No "use client"
 import { getDetails } from "@/app/lib/tmdb/tv";
-import { Navbar } from "@/app/components/Navbar";
+import { Navbar } from "@/app/components/GuestNavbar";
 import { Footer } from "@/app/components/Footer";
 import { WatchClient } from "@/app/homepage/series/[id]/watch/watchClient";
 

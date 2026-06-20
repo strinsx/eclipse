@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Navbar } from "@/app/components/Navbar";
+import { Navbar } from "@/app/components/GuestNavbar";
 import { Footer } from "@/app/components/Footer";
 import { SearchResults } from "./SearchResults";
 import { Searchpanel } from "@/app/components/movie/Searchpanel";

@@ -1,6 +1,6 @@
 // No "use client"
 import { getDetails, getSimilar } from "@/app/lib/tmdb/movie";
-import { Navbar } from "@/app/components/Navbar";
+import { Navbar } from "@/app/components/GuestNavbar";
 import { Footer } from "@/app/components/Footer";
 import { VideoPlayer } from "@/app/components/details/moviedetails/VideoPlayer";
 import { MovieInfo } from "@/app/components/details/moviedetails/MovieInfo";
