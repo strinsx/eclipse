@@ -1,6 +1,6 @@
 import { CardPanel } from "../components/movie/Cardpanel";
 import { MoviePanel } from "../components/movie/MoviePanel";
-import { Navbar } from "../components/Navbar";
+import  Navbar  from "../components/Navbar";
 import { TrendingPanel } from "../components/movie/TrendingPanel";
 import { Footer } from '../components/Footer'
 import { TopRatedPanel } from "../components/movie/TopRatedPanel";
