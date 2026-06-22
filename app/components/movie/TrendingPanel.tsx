@@ -16,7 +16,7 @@ export function TrendingPanel() {
         try {
             const response = await fetch('/api/movies/trending');
             const data = await response.json();
-            setTrending(data.results);
+            setTrending(data.results ?? []);
         } catch (error) {
             console.error(error);
         }
