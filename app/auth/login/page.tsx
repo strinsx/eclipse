@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Poppins } from "next/font/google";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -15,6 +16,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -32,7 +34,7 @@ export default function LoginPage() {
                 const data = await res.json();
                 setError(data.message || "Invalid email or password.");
             } else {
-                window.location.href = "/homepage";
+                router.push('/auth/onboarding')
             }
         } catch {
             setError("Something went wrong. Please try again.");
