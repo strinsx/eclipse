@@ -8,6 +8,7 @@ import { faPlus, faChild } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/app/lib/supabase/client";
+import AddProfileForm from "./AddProfileForm";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -43,37 +44,39 @@ export default function ProfileSelection() {
   const router = useRouter();
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+
+  async function fetchProfiles() {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      router.push("/auth/login");
+      return;
+    }
+
+    const { data: userProfile } = await supabase
+      .from("user_profiles")
+      .select("id")
+      .eq("user_id", user.id)
+      .single();
+
+    if (!userProfile) {
+      router.push("/auth/onboarding");
+      return;
+    }
+
+    const { data: allProfiles } = await supabase
+      .from("profiles")
+      .select("id, name, is_kids_profile")
+      .eq("user_profile_id", userProfile.id);
+
+    setProfiles(allProfiles ?? []);
+    setLoading(false);
+  }
 
   useEffect(() => {
-    async function fetchProfiles() {
-      const supabase = await createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        router.push("/auth/login");
-        return;
-      }
-
-      const { data: userProfile } = await supabase
-        .from("user_profiles")
-        .select("id")
-        .eq("user_id", user.id)
-        .single();
-
-      if (!userProfile) {
-        router.push("/auth/onboarding");
-        return;
-      }
-
-      const { data: allProfiles } = await supabase
-        .from("profiles")
-        .select("id, name, is_kids_profile")
-        .eq("user_profile_id", userProfile.id);
-
-      setProfiles(allProfiles ?? []);
-      setLoading(false);
-    }
     fetchProfiles();
   }, [router]);
 
@@ -87,6 +90,10 @@ export default function ProfileSelection() {
         <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: "#D4AF37", borderTopColor: "transparent" }} />
       </div>
     );
+  }
+
+  if (showCreateForm) {
+    return <AddProfileForm onSuccess={() => { setShowCreateForm(false); fetchProfiles(); }} />;
   }
 
   return (
@@ -144,8 +151,8 @@ export default function ProfileSelection() {
             </button>
           ))}
 
-          <Link
-            href="/auth/onboarding"
+          <button
+            onClick={() => setShowCreateForm(true)}
             className="flex flex-col items-center gap-3 group transition-transform duration-200 hover:scale-105"
           >
             <div className="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center border-2 border-dashed border-white/20 group-hover:border-white/50 transition-colors bg-white/5">
@@ -154,7 +161,7 @@ export default function ProfileSelection() {
             <span className="text-sm md:text-base text-white/40 group-hover:text-white/60 transition-colors">
               Add Profile
             </span>
-          </Link>
+          </button>
         </div>
       </main>
 
