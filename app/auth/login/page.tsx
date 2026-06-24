@@ -229,6 +229,27 @@ export default function LoginPage() {
                             Create an account
                         </Link>
                     </p>
+
+                    {/* Continue watching for free */}
+                    <Link
+                        href="/homepage"
+                        className="mt-2 w-full rounded-xl py-3 text-sm font-semibold tracking-wide transition-all duration-200 text-center block"
+                        style={{
+                            background: "rgba(255,255,255,0.05)",
+                            border: "1px solid rgba(212,175,55,0.2)",
+                            color: "var(--foreground)",
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                            e.currentTarget.style.border = "1px solid rgba(212,175,55,0.4)";
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                            e.currentTarget.style.border = "1px solid rgba(212,175,55,0.2)";
+                        }}
+                    >
+                        Continue watching for free
+                    </Link>
                 </div>
             </main>
 
