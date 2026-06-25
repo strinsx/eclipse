@@ -18,10 +18,10 @@ export default async function Navbar() {
     .from("user_profiles")
     .select("display_name")
     .eq("user_id", user.id)
-    .single()
+    .single();
 
   if (error || !profile) {
-    return <GuestNavbar />
+    return <GuestNavbar />;
   }
 
   return <UserNavbar displayName={profile.display_name} />;
