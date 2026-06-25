@@ -4,7 +4,7 @@ import { GuestNavbar } from "./GuestNavbar";
 import { UserNavbar } from "./UserNavbar";
 
 export default async function Navbar() {
-  const supabase = await createClient();
+  const { supabase } = await createClient();
 
   const {
     data: { user },
@@ -14,15 +14,15 @@ export default async function Navbar() {
     return <GuestNavbar />;
   }
 
- const {data: profile, error} = await supabase
- .from("user_profiles")
- .select("display_name")
- .eq("user_id", user.id)
- .single()
+  const { data: profile, error } = await supabase
+    .from("user_profiles")
+    .select("display_name")
+    .eq("user_id", user.id)
+    .single()
 
- if(error || !profile) {
+  if (error || !profile) {
     return <GuestNavbar />
- }
+  }
 
-  return <UserNavbar displayName={profile.display_name}/>;
+  return <UserNavbar displayName={profile.display_name} />;
 }
