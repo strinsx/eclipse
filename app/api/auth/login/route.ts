@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
-    const supabase = await createClient();
+    const { supabase, applyCookies } = await createClient();
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -19,13 +19,15 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       {
         user: data.user,
         session: data.session,
       },
       { status: 200 }
     );
+    applyCookies(response);
+    return response;
 
   } catch (error) {
     const message =
