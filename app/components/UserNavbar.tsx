@@ -46,7 +46,7 @@ export function UserNavbar({ displayName }: { displayName: string }) {
       {/* Left */}
       <div className="flex-1 flex items-center gap-2">
         <Image src={Icon} alt="Logo" width={36} height={36} />
-        <Link href="/" className="font-semibold text-lg md:text-2xl text-white">Eclipse</Link>
+        <Link href="/homepage" className="font-semibold text-lg md:text-2xl text-white">Eclipse</Link>
       </div>
 
       {/* Center — desktop only */}
