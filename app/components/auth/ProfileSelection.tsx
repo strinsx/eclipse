@@ -81,6 +81,7 @@ export default function ProfileSelection() {
   }, [router]);
 
   const handleSelect = (id: string) => {
+    document.cookie = `selected_profile_id=${id}; path=/; max-age=31536000; SameSite=Lax`;
     router.push("/homepage");
   };
 
