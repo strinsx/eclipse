@@ -45,3 +45,11 @@ export interface MovieDetails {
     production_countries: { iso_3166_1: string, name: string }[],
     belongs_to_collection: { id: number, name: string, poster_path: string, backdrop_path: string } | null,
 }
+
+export interface WatchLaterItem {
+    id: number;
+    title: string;
+    overview: string;
+    poster_path: string;
+    release_date: string;
+}
