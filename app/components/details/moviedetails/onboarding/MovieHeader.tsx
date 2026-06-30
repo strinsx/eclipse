@@ -1,7 +1,14 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { WatchLaterItem } from "@/app/types/movie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faCalendar, faClock, faPlay, faTv, faFilm } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faCalendar, faClock, faPlay, faTv, faFilm, faBookmark as faBookmarkSolid } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+
+const STORAGE_KEY = "eclipse_watchlist";
 
 interface Props {
     id: number,
@@ -39,6 +46,30 @@ export function MovieHeader({
     const hours = Math.floor(runtime / 60);
     const mins = runtime % 60;
     const year = release_date?.slice(0, 4);
+
+    const [isBookmarked, setIsBookmarked] = useState(false);
+
+    useEffect(() => {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            const list: WatchLaterItem[] = JSON.parse(stored);
+            setIsBookmarked(list.some((item) => item.id === id));
+        }
+    }, [id]);
+
+    function toggleWatchLater() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        const list: WatchLaterItem[] = stored ? JSON.parse(stored) : [];
+
+        if (isBookmarked) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list.filter((item) => item.id !== id)));
+        } else {
+            list.push({ id, title, overview, poster_path, release_date });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        }
+
+        setIsBookmarked(!isBookmarked);
+    }
 
     return (
         <div className="relative w-full min-h-[500px] overflow-hidden rounded-xl">
@@ -130,11 +161,13 @@ export function MovieHeader({
                     {/* Action buttons */}
                     <div className="flex items-center gap-3 mt-2 flex-wrap">
                         <Link href={`/homepage/movies/${id}/watch`}>
-
                             <button className="flex items-center cursor-pointer gap-2 bg-foreground hover:bg-foreground/50 text-background font-semibold px-5 py-2 rounded-full transition text-sm">
                                 <FontAwesomeIcon icon={faPlay} className="text-xs" /> Watch Now
                             </button>
                         </Link>
+                        <button onClick={toggleWatchLater} className={`flex items-center cursor-pointer gap-2 px-4 py-2 rounded-full transition text-sm ${isBookmarked ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "bg-background/50 hover:bg-background/80 text-foreground border border-foreground/20 hover:border-foreground/40"}`}>
+                            <FontAwesomeIcon icon={isBookmarked ? faBookmarkSolid : faBookmark} className="text-xs" /> {isBookmarked ? "Bookmarked" : "Watch Later"}
+                        </button>
                     </div>
 
 
