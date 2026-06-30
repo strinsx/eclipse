@@ -27,15 +27,19 @@ export async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/auth/login";
-    return NextResponse.redirect(url);
-  }
+  const { pathname } = request.nextUrl;
+
+  if (user) {
+    if (pathname.startsWith("/auth/login") || pathname.startsWith("/auth/signup")) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/homepage";
+      return NextResponse.redirect(url);
+    }
+  } 
 
   return supabaseResponse;
 }
 
 export const config = {
-  matcher: ["/auth/onboarding", "/auth/onboarding/profile-selection"],
+  matcher: ["/auth/:path*", "/homepage/:path*"],
 };
