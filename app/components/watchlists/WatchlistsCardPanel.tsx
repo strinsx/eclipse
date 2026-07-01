@@ -1,33 +1,17 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { WatchLaterItem } from "../../types/movie";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-
-const STORAGE_KEY = "eclipse_watchlist";
-
-function getWatchlist(): WatchLaterItem[] {
-    if (typeof window === "undefined") return [];
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
-}
+import { getWatchlist } from "@/app/lib/services/watchlist.services";
+import { WatchLaterItem } from "@/app/types/movie";
 
 export function WatchlistsCardPanel() {
-    const [items, setItems] = useState<WatchLaterItem[]>([]);
+    const [items, setItems] = useState<(WatchLaterItem & { media_type: string })[]>([]);
 
     useEffect(() => {
-        setItems(getWatchlist());
-
-        function handleStorage(e: StorageEvent) {
-            if (e.key === STORAGE_KEY) {
-                setItems(getWatchlist());
-            }
-        }
-
-        window.addEventListener("storage", handleStorage);
-        return () => window.removeEventListener("storage", handleStorage);
+        getWatchlist().then(setItems);
     }, []);
 
     if (items.length === 0) {
@@ -60,7 +44,7 @@ export function WatchlistsCardPanel() {
                             ease: "easeOut"
                         }}
                     >
-                        <Link href={`/homepage/movies/${m.id}/onboarding`}>
+                        <Link href={`/homepage/${m.media_type === "tv" ? "series" : "movies"}/${m.id}/onboarding`}>
                             <div className="group relative flex flex-col cursor-pointer">
                                 {/* Poster */}
                                 <div className="relative overflow-hidden rounded-xl h-[160px] sm:h-[200px] md:h-[240px]">
