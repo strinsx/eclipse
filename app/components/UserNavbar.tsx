@@ -111,7 +111,7 @@ export function UserNavbar({ displayName }: { displayName: string }) {
                 <FontAwesomeIcon icon={faList} className="text-xs" />
                 Watchlists
               </Link>
-              <Link href="/profiles" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 py-1.5 hover:text-foreground transition">
+              <Link href="/auth/onboarding/profile-selection" onClick={() => setMobileOpen(false)} className="flex items-center gap-2 py-1.5 hover:text-foreground transition">
                 <FontAwesomeIcon icon={faCircleUser} className="text-xs" />
                 Profiles
               </Link>
