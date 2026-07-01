@@ -3,12 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { WatchLaterItem } from "@/app/types/movie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faCalendar, faClock, faPlay, faTv, faFilm, faBookmark as faBookmarkSolid } from "@fortawesome/free-solid-svg-icons";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons";
-
-const STORAGE_KEY = "eclipse_watchlist";
+import { isWatchlisted, addToWatchlist, removeFromWatchlist } from "@/app/lib/services/watchlist.services";
 
 interface Props {
     id: number,
@@ -50,24 +48,15 @@ export function MovieHeader({
     const [isBookmarked, setIsBookmarked] = useState(false);
 
     useEffect(() => {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            const list: WatchLaterItem[] = JSON.parse(stored);
-            setIsBookmarked(list.some((item) => item.id === id));
-        }
-    }, [id]);
+        isWatchlisted(id, type).then(setIsBookmarked);
+    }, [id, type]);
 
-    function toggleWatchLater() {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        const list: WatchLaterItem[] = stored ? JSON.parse(stored) : [];
-
+    async function toggleWatchLater() {
         if (isBookmarked) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(list.filter((item) => item.id !== id)));
+            await removeFromWatchlist(id, type);
         } else {
-            list.push({ id, title, overview, poster_path, release_date });
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+            await addToWatchlist({ id, title, overview, poster_path, release_date }, type);
         }
-
         setIsBookmarked(!isBookmarked);
     }
 
