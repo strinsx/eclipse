@@ -11,6 +11,7 @@ import { createClient } from "@/app/lib/supabase/client";
 import AddProfileForm from "./AddProfileForm";
 import ConfirmDialog from "./ConfirmDialog";
 import EditProfileForm from "./EditProfileForm";
+import { selectProfile } from "@/app/actions";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -93,9 +94,8 @@ export default function ProfileSelection() {
     fetchProfiles();
   }, [router]);
 
-  const handleSelect = (id: string) => {
-    document.cookie = `selected_profile_id=${id}; path=/; max-age=31536000; SameSite=Lax`;
-    router.push("/homepage");
+  const handleSelect = async (id: string) => {
+    await selectProfile(id);
   };
 
   const handleDelete = (profile: Profile, e: React.MouseEvent) => {
