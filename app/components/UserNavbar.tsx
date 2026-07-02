@@ -29,7 +29,7 @@ export function UserNavbar({ displayName }: { displayName: string }) {
         <FontAwesomeIcon icon={faList} className="text-xs" />
         Watchlists
       </Link>
-      <Link href="/profiles" className="flex items-center gap-2 px-4 py-2 text-sm text-foreground/70 hover:text-foreground hover:bg-white/5 transition">
+      <Link href="/auth/onboarding/profile-selection" className="flex items-center gap-2 px-4 py-2 text-sm text-foreground/70 hover:text-foreground hover:bg-white/5 transition">
         <FontAwesomeIcon icon={faCircleUser} className="text-xs" />
         Profiles
       </Link>
