@@ -63,7 +63,7 @@ export default function SignupPage() {
       return;
     }
 
-    window.location.href = "/auth/login";
+    window.location.href = "/auth/onboarding";
   };
 
   const labelClass = "text-xs font-semibold uppercase tracking-widest";
