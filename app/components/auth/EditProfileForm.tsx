@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { ErrorCard } from "@/app/components/ui/ErrorCard";
 
 export default function EditProfileForm({
   currentName,
@@ -62,18 +63,7 @@ export default function EditProfileForm({
           </button>
         </div>
 
-        {error && (
-          <div
-            className="text-sm px-4 py-3 rounded-lg"
-            style={{
-              background: "rgba(220,38,38,0.15)",
-              border: "1px solid rgba(220,38,38,0.35)",
-              color: "#fca5a5",
-            }}
-          >
-            {error}
-          </div>
-        )}
+        <ErrorCard message={error} />
 
         <div className="flex flex-col gap-1.5">
           <label

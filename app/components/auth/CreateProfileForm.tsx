@@ -6,6 +6,7 @@ import { Poppins } from "next/font/google";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createProfile, getUserProfileId } from "@/app/lib/services/profile.services";
+import { ErrorCard } from "@/app/components/ui/ErrorCard";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -31,8 +32,8 @@ export default function CreateProfileForm() {
 
       await createProfile(name.trim(), isKidsProfile);
       router.push("/auth/onboarding/profile-selection");
-    } catch {
-      setError("Failed to create profile. Please try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to create profile.");
     } finally {
       setLoading(false);
     }
@@ -86,18 +87,7 @@ export default function CreateProfileForm() {
             </p>
           </div>
 
-          {error && (
-            <div
-              className="text-sm px-4 py-3 rounded-lg"
-              style={{
-                background: "rgba(220,38,38,0.15)",
-                border: "1px solid rgba(220,38,38,0.35)",
-                color: "#fca5a5",
-              }}
-            >
-              {error}
-            </div>
-          )}
+          <ErrorCard message={error} />
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-col gap-1.5">

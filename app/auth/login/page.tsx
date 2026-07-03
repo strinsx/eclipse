@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Poppins } from "next/font/google";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ErrorCard } from "@/app/components/ui/ErrorCard";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -93,19 +94,7 @@ export default function LoginPage() {
                         </div>
                     </div>
 
-                    {/* Error */}
-                    {error && (
-                        <div
-                            className="text-sm px-4 py-3 rounded-lg"
-                            style={{
-                                background: "rgba(220,38,38,0.15)",
-                                border: "1px solid rgba(220,38,38,0.35)",
-                                color: "#fca5a5",
-                            }}
-                        >
-                            {error}
-                        </div>
-                    )}
+                    <ErrorCard message={error} />
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
