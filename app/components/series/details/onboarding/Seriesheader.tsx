@@ -1,7 +1,12 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faCalendar, faFilm, faTv, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faCalendar, faFilm, faTv, faPlay, faBookmark as faBookmarkSolid } from "@fortawesome/free-solid-svg-icons";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons";
+import { isWatchlisted, addToWatchlist, removeFromWatchlist } from "@/app/lib/services/watchlist.services";
 
 interface Props {
     id: number;
@@ -33,6 +38,21 @@ export function SeriesHeader({
     number_of_episodes,
 }: Props) {
     const year = first_air_date?.slice(0, 4);
+
+    const [isBookmarked, setIsBookmarked] = useState(false);
+
+    useEffect(() => {
+        isWatchlisted(id, "tv").then(setIsBookmarked);
+    }, [id]);
+
+    async function toggleWatchLater() {
+        if (isBookmarked) {
+            await removeFromWatchlist(id, "tv");
+        } else {
+            await addToWatchlist({ id, title: name, overview, poster_path, release_date: first_air_date }, "tv");
+        }
+        setIsBookmarked(!isBookmarked);
+    }
 
     return (
         <div className="relative w-full min-h-[500px] overflow-hidden rounded-xl">
@@ -122,6 +142,9 @@ export function SeriesHeader({
                                 <FontAwesomeIcon icon={faPlay} className="text-xs" /> Watch Now
                             </button>
                         </Link>
+                        <button onClick={toggleWatchLater} className={`flex items-center cursor-pointer gap-2 px-4 py-2 rounded-full transition text-sm ${isBookmarked ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "bg-background/50 hover:bg-background/80 text-foreground border border-foreground/20 hover:border-foreground/40"}`}>
+                            <FontAwesomeIcon icon={isBookmarked ? faBookmarkSolid : faBookmark} className="text-xs" /> {isBookmarked ? "Bookmarked" : "Watch Later"}
+                        </button>
                     </div>
 
                 </div>
