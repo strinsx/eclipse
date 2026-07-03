@@ -7,6 +7,7 @@ import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { WatchLaterButton } from "@/app/components/ui/WatchLaterButton";
 
 export function MoviePanel() {
 
@@ -112,6 +113,11 @@ export function MoviePanel() {
 
                                     {/* Bottom gradient overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-10" />
+
+                                    {/* Watch later button */}
+                                    <div className="absolute bottom-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition duration-300" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
+                                        <WatchLaterButton id={m.id} title={m.title} overview={m.overview} poster_path={m.poster_path} release_date={m.release_date} mediaType="movie" />
+                                    </div>
                                 </div>
 
                                 {/* Info */}
