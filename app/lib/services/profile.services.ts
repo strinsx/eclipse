@@ -43,11 +43,32 @@ export async function getUserProfileId() {
     return data?.id ?? null;
 }
 
+export async function getProfileCount() {
+    const supabase = await createClient();
+
+    const userProfileId = await getUserProfileId();
+    if (!userProfileId) return 0;
+
+    const { count } = await supabase
+        .from("profiles")
+        .select("*", { count: "exact", head: true })
+        .eq("user_profile_id", userProfileId);
+
+    return count ?? 0;
+}
+
+const MAX_PROFILES = 4;
+
 export async function createProfile(name: string, is_kids_profile: boolean) {
     const supabase = await createClient();
 
     const userProfileId = await getUserProfileId();
     if (!userProfileId) throw new Error("User profile not found");
+
+    const currentCount = await getProfileCount();
+    if (currentCount >= MAX_PROFILES) {
+        throw new Error(`You can only have up to ${MAX_PROFILES} profiles.`);
+    }
 
     const { data, error } = await supabase
         .from("profiles")

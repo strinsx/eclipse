@@ -246,17 +246,19 @@ export default function ProfileSelection() {
             </div>
           ))}
 
-          <button
-            onClick={() => setShowCreateForm(true)}
-            className="flex flex-col items-center gap-3 group transition-transform duration-200 hover:scale-105"
-          >
-            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center border-2 border-dashed border-white/20 group-hover:border-white/50 transition-colors bg-white/5">
-              <FontAwesomeIcon icon={faPlus} className="text-2xl md:text-3xl text-white/40 group-hover:text-white/70 transition-colors" />
-            </div>
-            <span className="text-sm md:text-base text-white/40 group-hover:text-white/60 transition-colors">
-              Add Profile
-            </span>
-          </button>
+          {profiles.length < 4 && (
+            <button
+              onClick={() => setShowCreateForm(true)}
+              className="flex flex-col items-center gap-3 group transition-transform duration-200 hover:scale-105"
+            >
+              <div className="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center border-2 border-dashed border-white/20 group-hover:border-white/50 transition-colors bg-white/5">
+                <FontAwesomeIcon icon={faPlus} className="text-2xl md:text-3xl text-white/40 group-hover:text-white/70 transition-colors" />
+              </div>
+              <span className="text-sm md:text-base text-white/40 group-hover:text-white/60 transition-colors">
+                Add Profile
+              </span>
+            </button>
+          )}
         </div>
       </main>
 
