@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Series } from "@/app/types/tvshows";
+import { WatchLaterButton } from "@/app/components/ui/WatchLaterButton";
 
 export function TrendingPanelTV() {
 
@@ -70,6 +71,11 @@ export function TrendingPanelTV() {
 
                                 {/* Bottom gradient overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 z-10" />
+
+                                {/* Watch later button */}
+                                <div className="absolute bottom-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition duration-300" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
+                                    <WatchLaterButton id={m.id} title={m.name} overview={m.overview} poster_path={m.poster_path} release_date={m.first_air_date} mediaType="tv" />
+                                </div>
                             </div>
 
                             {/* Info */}
