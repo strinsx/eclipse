@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { WatchLaterButton } from "@/app/components/ui/WatchLaterButton";
 
 export function CardPanel() {
     const [isLoading, setIsLoading] = useState(false);
@@ -102,9 +103,7 @@ export function CardPanel() {
                             </button>
                         </Link>
 
-                   {/*      <button className="cursor-pointer flex items-center gap-2 bg-foreground/10 backdrop-blur-sm text-white font-semibold px-5 py-2 rounded-full hover:bg-foreground/20 transition text-sm border border-foreground/20">
-                            + Play Later
-                        </button> */}
+                        <WatchLaterButton id={currentMovie.id} title={currentMovie.title} overview={currentMovie.overview} poster_path={(currentMovie as any).poster_path ?? ""} release_date={""} mediaType="movie" className="bg-foreground/10 backdrop-blur-sm text-white font-semibold hover:bg-foreground/20 border border-foreground/20" />
                     </div>
                 </div>
 
