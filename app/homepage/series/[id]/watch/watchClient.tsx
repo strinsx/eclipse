@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SeriesVideoPlayer } from "@/app/components/series/details/watch/SeriesVideoPlayer";
 import { EpisodesPanel } from "@/app/components/series/details/watch/EpisodesPanel";
 import { SeriesDetailsInfo } from "@/app/components/series/details/watch/SeriesDetails";
+import { RecentlyTracker } from "@/app/components/recently/RecentlyTracker";
 
 interface Props {
     series: any;
@@ -14,7 +15,18 @@ export function WatchClient({ series }: Props) {
     const [episode, setEpisode] = useState(1);
 
     return (
-        <div className="w-full flex flex-col gap-6 md:gap-8 lg:gap-10 md:px-6 py-4 md:py-6 lg:py-8">
+        <>
+            <RecentlyTracker
+                tmdb_id={series.id}
+                media_type="tv"
+                title={series.name}
+                overview={series.overview}
+                backdrop_path={series.backdrop_path}
+                release_date={series.first_air_date}
+                season_number={season}
+                episode_number={episode}
+            />
+            <div className="w-full flex flex-col gap-6 md:gap-8 lg:gap-10 md:px-6 py-4 md:py-6 lg:py-8">
             {/* Main Content Section */}
             <div className="flex flex-col lg:flex-row gap-4 md:gap-6 lg:gap-10 w-full">
                 {/* Video Player + Info - Full width on mobile, flexible on larger screens */}
@@ -54,5 +66,6 @@ export function WatchClient({ series }: Props) {
                 </div>
             </div>
         </div>
+        </>
     );
 }

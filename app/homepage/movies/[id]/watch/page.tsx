@@ -6,7 +6,7 @@ import { VideoPlayer } from "@/app/components/details/moviedetails/VideoPlayer";
 import { MovieInfo } from "@/app/components/details/moviedetails/MovieInfo";
 import { SimilarMovies } from "@/app/components/details/moviedetails/SimilarMovies";
 import { MovieDetailsInfo } from "@/app/components/details/moviedetails/CastInfo";
-
+import { RecentlyTracker } from "@/app/components/recently/RecentlyTracker";
 
 export default async function MoviePage({
   params,
@@ -21,6 +21,15 @@ export default async function MoviePage({
     <div className="flex flex-col w-full px-4 md:px-0 md:w-[85%] lg:w-[70%] mx-auto min-h-screen">
 
       <Navbar />
+
+      <RecentlyTracker
+        tmdb_id={movie.id}
+        media_type="movie"
+        title={movie.title}
+        overview={movie.overview}
+        backdrop_path={movie.backdrop_path}
+        release_date={movie.release_date}
+      />
 
       <div className="flex-1 flex flex-col gap-4 min-w-0">
 
