@@ -53,3 +53,16 @@ export interface WatchLaterItem {
     poster_path: string;
     release_date: string;
 }
+
+export interface ContinueWatching {
+    id: number;
+    title: string;
+    overview: string;
+    poster_path: string;
+    backdrop_path: string;
+    release_date: string;
+    season_number: number;
+    episode_number: number;
+    updated_at: string;
+}
+
