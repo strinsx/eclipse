@@ -16,7 +16,7 @@ export function TopRatedPanel() {
         try {
             const response = await fetch('/api/movies/top-rated');
             const data = await response.json();
-            setRated(data.results);
+            setRated(data.results ?? []);
         } catch (error) {
             console.error(error);
         }
