@@ -33,7 +33,7 @@ export function RecentlyWatched() {
   return (
     <div className="m-3 py-6">
       <h1 className="text-white text-lg font-bold tracking-tight mb-4">
-        Continue Watching
+        Recently Watched
       </h1>
 
       <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-thin">
