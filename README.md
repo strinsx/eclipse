@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Eclipse
+
+A Netflix-style streaming platform frontend for browsing and discovering movies and TV shows, powered by the TMDB API with user authentication and personalized watchlists via Supabase.
+
+## Features
+
+- **Browse** — popular, trending, top-rated, now-playing movies and TV series
+- **Search** — combined movie and TV series search
+- **Detail pages** — cast, credits, trailers, and similar content
+- **User auth** — signup, login, logout via Supabase Auth
+- **Multi-profile** — up to 4 profiles per account, including a kid-safe (PG-filtered) profile
+- **Watchlists** — "Watch Later" lists per profile, persisted in Supabase
+- **Recently watched** — per-profile tracking with rate limiting
+- **Dark theme** — gold (#D4AF37) on dark (#0B0B0F) UI with responsive layout
+
+## Tech Stack
+
+| Layer | |
+|---|---|
+| **Framework** | Next.js 16 (App Router) |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS v4 |
+| **Animation** | Framer Motion |
+| **Icons** | Font Awesome 7 |
+| **Auth / DB** | Supabase |
+| **Data** | TMDB API |
+
+## System Architecture
+
+```
+Browser
+  │
+  ▼
+Next.js App Router
+  ├── Server Components (layouts, pages, Navbar)
+  ├── Client Components (panels, carousels, forms)
+  │
+  ├── Route Handlers (app/api/)
+  │   ├── /api/auth/*         → Supabase Auth
+  │   ├── /api/movies/*       → TMDB API (proxied)
+  │   ├── /api/series/*       → TMDB API (proxied)
+  │   └── /api/search         → TMDB API (proxied)
+  │
+  ├── Server Actions (app/actions.ts)
+  │   └── selectProfile       → Sets profile cookie
+  │
+  ├── Auth Middleware (proxy.ts)
+  │   └── Route protection & redirects
+  │
+  ├── lib/supabase/           → Supabase SSR client
+  ├── lib/tmdb/               → TMDB API wrappers
+  ├── lib/services/           → Business logic (auth, profiles, watchlists, recently)
+  └── types/                  → Shared TypeScript interfaces
+```
+
+**Data flow:** Client components call Route Handlers (for TMDB data) or use Supabase client directly (for auth/DB operations). Server components fetch data at render time via Supabase server client or TMDB wrappers. Profile context flows through cookies set by server actions and read by middleware and server components.
 
 ## Getting Started
 
-First, run the development server:
+Copy `.env.local.example` to `.env.local` and fill in your TMDB API key and Supabase project credentials.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | |
+|---|---|
+| `npm run dev` | Start dev server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+├── api/           # Route handlers (auth, movies, series, search)
+├── auth/          # Login, signup, onboarding pages
+├── homepage/      # Dashboard, search, movie/series detail pages
+├── profile/       # Profile page and watchlists
+├── components/    # UI components (navbar, cards, panels, forms)
+├── lib/           # Supabase client, TMDB API wrappers, services
+└── types/         # TypeScript interfaces
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable | Description |
+|---|---|
+| `TMDB_API_KEY` | The Movie Database API key |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous API key |
 
-## Deploy on Vercel
+## Tradeoffs
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **No continue-watching progress tracking** — the open-source media player's query is rejected by CORS, so resume-playback state cannot be persisted per user.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Learning
+
+- Navigating and routing in Next.js App Router
+- Designing and architecting a full-stack web system
+- How data travels from database to UI and back
+- Supabase Row-Level Security policies and authentication flows
+
+## Future Improvements
+
+- Rating buttons so users can personalize movie recommendations
+- Genre filter controls on browse and search pages
