@@ -25,15 +25,15 @@ export function UserNavbar({ displayName }: { displayName: string }) {
 
   const menuItems = (
     <>
-      <Link href="/profile/watchlists" className="flex items-center gap-2 px-4 py-2 text-sm text-foreground/70 hover:text-foreground hover:bg-white/5 transition">
+      <Link href="/profile/watchlists" className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:text-foreground hover:bg-white/5 transition">
         <FontAwesomeIcon icon={faList} className="text-xs" />
         Watchlists
       </Link>
-      <Link href="/auth/onboarding/profile-selection" className="flex items-center gap-2 px-4 py-2 text-sm text-foreground/70 hover:text-foreground hover:bg-white/5 transition">
+      <Link href="/auth/onboarding/profile-selection" className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:text-foreground hover:bg-white/5 transition">
         <FontAwesomeIcon icon={faCircleUser} className="text-xs" />
         Profiles
       </Link>
-      <button onClick={handleLogout} className="flex items-center gap-2 px-4 py-2 text-sm text-foreground/70 hover:text-foreground hover:bg-white/5 transition w-full text-left">
+      <button onClick={handleLogout} className="flex items-center gap-2 px-4 py-2 text-sm text-foreground hover:text-foreground hover:bg-white/5 transition w-full text-left">
         <FontAwesomeIcon icon={faRightFromBracket} className="text-xs" />
         Logout
       </button>
@@ -56,11 +56,11 @@ export function UserNavbar({ displayName }: { displayName: string }) {
 
       {/* Right — desktop */}
       <div className="flex-1 hidden md:flex items-center justify-end gap-4">
-        <Link href="/" className="text-foreground/70 hover:text-foreground transition flex items-center gap-1.5">
+        <Link href="/" className="text-foreground hover:text-foreground transition flex items-center gap-1.5">
           <FontAwesomeIcon icon={faHouse} className="text-sm" />
           Home
         </Link>
-        <Link href="/homepage/search" className="text-foreground/70 flex items-center gap-2 flex-row-reverse hover:text-foreground transition"> Search
+        <Link href="/homepage/search" className="text-foreground flex items-center gap-2 flex-row-reverse hover:text-foreground transition"> Search
           <FontAwesomeIcon icon={faMagnifyingGlass} className="text-lg" />
         </Link>
 
@@ -69,7 +69,7 @@ export function UserNavbar({ displayName }: { displayName: string }) {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             onBlur={() => setTimeout(() => setMenuOpen(false), 150)}
-            className="flex items-center gap-1.5 text-sm text-foreground/70 hover:text-foreground transition"
+            className="flex items-center gap-1.5 text-sm text-foreground hover:text-foreground transition"
           >
             <FontAwesomeIcon icon={faUser} className="text-xs" />
             {displayName}
