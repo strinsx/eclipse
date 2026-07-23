@@ -43,7 +43,7 @@ export function VideoPlayer({ title, release_date, backdrop_path, id }: Props) {
                 <div className="w-full h-full bg-black flex items-center justify-center">
                     <iframe
                         className="absolute inset-0 w-full h-full"
-                        src={`https://vsembed.ru/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1`}
+                        src={`https://vsembed.su/embed/movie?tmdb=${id}&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1`}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                         allowFullScreen
                         style={{ border: "none" }}
