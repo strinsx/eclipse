@@ -42,7 +42,7 @@ export async function addToWatchlist(item: WatchLaterItem, mediaType: string = "
             title: item.title,
             overview: item.overview,
             poster_path: item.poster_path,
-            release_date: item.release_date,
+            release_date: item.release_date || null,
         });
 
     if (error && error.code !== "23505") throw error;

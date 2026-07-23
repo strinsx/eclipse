@@ -120,7 +120,7 @@ export function CardPanel() {
                         </button>
                     </Link>
 
-                    <WatchLaterButton id={movie.id} title={movie.title} overview={movie.overview} poster_path={(movie as any).poster_path ?? ""} release_date={""} mediaType="movie" className="bg-white/10 backdrop-blur-sm text-white font-semibold hover:bg-white/20 border border-white/20" />
+                    <WatchLaterButton id={movie.id} title={movie.title} overview={movie.overview} poster_path={(movie as any).poster_path ?? ""} release_date={(movie as any).release_date ?? ""} mediaType="movie" className="bg-white/10 backdrop-blur-sm text-white font-semibold hover:bg-white/20 border border-white/20" />
                 </div>
             </div>
         );
