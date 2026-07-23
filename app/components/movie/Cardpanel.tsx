@@ -14,6 +14,9 @@ export function CardPanel() {
     const [isDragging, setIsDragging] = useState(false);
     const [dragOffset, setDragOffset] = useState(0);
     const dragStartX = useRef(0);
+    const isPointerDown = useRef(false);
+    const isDragActive = useRef(false);
+    const dragOffsetRef = useRef(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const fetchData = async () => {
@@ -36,25 +39,38 @@ export function CardPanel() {
     const SWIPE_THRESHOLD = 50;
 
     const handleDragStart = (clientX: number) => {
-        setIsDragging(true);
+        isPointerDown.current = true;
+        isDragActive.current = false;
+        dragOffsetRef.current = 0;
         setDragOffset(0);
         dragStartX.current = clientX;
     };
 
     const handleDragMove = (clientX: number) => {
-        if (!isDragging) return;
-        setDragOffset(clientX - dragStartX.current);
+        if (!isPointerDown.current) return;
+        const offset = clientX - dragStartX.current;
+        dragOffsetRef.current = offset;
+        setDragOffset(offset);
+        if (!isDragActive.current && Math.abs(offset) > 5) {
+            isDragActive.current = true;
+            setIsDragging(true);
+        }
     };
 
     const handleDragEnd = () => {
-        if (!isDragging) return;
-        setIsDragging(false);
+        if (!isPointerDown.current) return;
+        isPointerDown.current = false;
 
-        if (Math.abs(dragOffset) >= SWIPE_THRESHOLD) {
-            if (dragOffset > 0) {
-                prevSlide();
-            } else {
-                nextSlide();
+        if (isDragActive.current) {
+            isDragActive.current = false;
+            setIsDragging(false);
+
+            if (Math.abs(dragOffsetRef.current) >= SWIPE_THRESHOLD) {
+                if (dragOffsetRef.current > 0) {
+                    prevSlide();
+                } else {
+                    nextSlide();
+                }
             }
         }
         setDragOffset(0);
