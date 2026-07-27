@@ -16,10 +16,12 @@ interface Episode {
 interface Props {
     tvId: number;
     numberOfSeasons: number;
+    activeSeason?: number;
+    activeEpisode?: number;
     onEpisodeSelect: (season: number, episode: number) => void;
 }
 
-export function EpisodesPanel({ tvId, numberOfSeasons, onEpisodeSelect }: Props) {
+export function EpisodesPanel({ tvId, numberOfSeasons, activeSeason, activeEpisode, onEpisodeSelect }: Props) {
     const [selectedSeason, setSelectedSeason] = useState(1);
     const [episodes, setEpisodes] = useState<Episode[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +46,7 @@ export function EpisodesPanel({ tvId, numberOfSeasons, onEpisodeSelect }: Props)
     const seasons = Array.from({ length: numberOfSeasons }, (_, i) => i + 1);
 
     return (
-        <div className="bg-foreground/5 rounded-lg sm:rounded-xl p-3 sm:p-4 w-full lg:w-80 lg:min-w-80 shadow-md hover:shadow-lg transition-shadow duration-300">
+        <div className="rounded-lg sm:rounded-xl p-3 sm:p-4 w-full lg:w-80 lg:min-w-80">
             {/* Header */}
             <h2 className="text-foreground font-bold text-sm sm:text-base mb-3 sm:mb-4 flex items-center gap-2">
                 Episodes
@@ -80,10 +82,17 @@ export function EpisodesPanel({ tvId, numberOfSeasons, onEpisodeSelect }: Props)
                     <p className="text-foreground/40 text-xs sm:text-sm text-center py-4">No episodes found</p>
                 )}
 
-                {!isLoading && episodes.map((ep) => (
-                    <div
-                        key={ep.id}
-                        className="flex items-start sm:items-center gap-2 sm:gap-3 cursor-pointer hover:bg-foreground/10 rounded-lg p-1.5 sm:p-2 transition-all duration-200 active:bg-foreground/20"
+                {!isLoading && episodes.map((ep) => {
+                    const isActive = activeSeason === selectedSeason && activeEpisode === ep.episode_number;
+                    return (
+                        <div
+                            key={ep.id}
+                            data-active={isActive ? "true" : "false"}
+                            className={`flex items-start sm:items-center gap-2 sm:gap-3 cursor-pointer rounded-lg p-1.5 sm:p-2 transition-all duration-200 ${
+                                isActive
+                                    ? "bg-blue-600/20 ring-1 ring-blue-500 hover:bg-blue-600/30"
+                                    : "hover:bg-foreground/10 active:bg-foreground/20"
+                            }`}
                         onClick={() => onEpisodeSelect(selectedSeason, ep.episode_number)}
                         role="button"
                         tabIndex={0}
@@ -123,7 +132,8 @@ export function EpisodesPanel({ tvId, numberOfSeasons, onEpisodeSelect }: Props)
                             </span>
                         </div>
                     </div>
-                ))}
+                );
+                })}
             </div>
         </div>
     );

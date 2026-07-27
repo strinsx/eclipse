@@ -58,6 +58,8 @@ export function WatchClient({ series }: Props) {
                     <EpisodesPanel
                         tvId={series.id}
                         numberOfSeasons={series.number_of_seasons}
+                        activeSeason={season}
+                        activeEpisode={episode}
                         onEpisodeSelect={(s, e) => {
                             setSeason(s);
                             setEpisode(e);
