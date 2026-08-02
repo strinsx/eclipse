@@ -21,6 +21,10 @@ function getActiveProfileId(): string | null {
   return match ? match[1] : null;
 }
 
+export function hasActiveProfile(): boolean {
+  return getActiveProfileId() !== null;
+}
+
 async function insertRecentlyWatched(item: RecentlyInput): Promise<void> {
   const supabase = await createClient();
   const profileId = getActiveProfileId();
@@ -75,7 +79,7 @@ async function enforceRateLimit(): Promise<void> {
 export async function addToRecentlyWatched(item: RecentlyInput): Promise<void> {
   const supabase = await createClient();
   const profileId = getActiveProfileId();
-  if (!profileId) throw new Error("No active profile");
+  if (!profileId) return;
 
   const threshold = new Date(Date.now() - UPDATE_THRESHOLD_MS).toISOString();
 
@@ -112,6 +116,29 @@ export async function addToRecentlyWatched(item: RecentlyInput): Promise<void> {
 
   await insertRecentlyWatched(item);
   await enforceRateLimit();
+}
+
+export async function getSeriesProgress(
+  tmdbId: number
+): Promise<{ season: number; episode: number } | null> {
+  const supabase = await createClient();
+  const profileId = getActiveProfileId();
+  if (!profileId) return null;
+
+  const { data } = await supabase
+    .from("recently_watched")
+    .select("season_number, episode_number")
+    .eq("profile_id", profileId)
+    .eq("tmdb_id", tmdbId)
+    .eq("media_type", "tv")
+    .maybeSingle();
+
+  if (!data || !data.season_number) return null;
+
+  return {
+    season: data.season_number,
+    episode: data.episode_number ?? 1,
+  };
 }
 
 export async function getRecentlyWatched(): Promise<ContinueWatching[]> {
