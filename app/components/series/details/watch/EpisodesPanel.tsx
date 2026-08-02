@@ -22,7 +22,7 @@ interface Props {
 }
 
 export function EpisodesPanel({ tvId, numberOfSeasons, activeSeason, activeEpisode, onEpisodeSelect }: Props) {
-    const [selectedSeason, setSelectedSeason] = useState(1);
+    const [selectedSeason, setSelectedSeason] = useState(activeSeason ?? 1);
     const [episodes, setEpisodes] = useState<Episode[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -42,6 +42,12 @@ export function EpisodesPanel({ tvId, numberOfSeasons, activeSeason, activeEpiso
     useEffect(() => {
         fetchEpisodes(selectedSeason);
     }, [selectedSeason, tvId]);
+
+    useEffect(() => {
+        if (activeSeason && activeSeason !== selectedSeason) {
+            setSelectedSeason(activeSeason);
+        }
+    }, [activeSeason]);
 
     const seasons = Array.from({ length: numberOfSeasons }, (_, i) => i + 1);
 
